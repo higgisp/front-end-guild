@@ -1,15 +1,7 @@
-module.exports = {
-  entry: './js/main.jsx',
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loader: 'babel'
-    }]
-  },
-  output: {
-    filename: 'js/global.js'
-  }
-};
+var getConfig = require('hjs-webpack')
+
+module.exports = getConfig({
+  in: 'src/app.js',
+  out: 'public',
+  clearBeforeBuild: true
+})

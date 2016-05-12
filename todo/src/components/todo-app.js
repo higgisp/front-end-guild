@@ -1,52 +1,54 @@
-var TodoItem = require('./TodoItem');
+import React from 'react'
+import TodoItem from './todo-item'
 
-var TodoApp = React.createClass({
+export default React.createClass({
+  displayName: 'TodoApp',
 
   getInitialState: function() {
     return {
       items: JSON.parse(localStorage.getItem('items')) || [],
       value: ''
-    };
+    }
   },
 
   handleChange: function(e) {
-    this.setState({ value: e.target.value });
+    this.setState({ value: e.target.value })
   },
 
   handleDelete: function(item) {
-    var items = this.state.items;
+    var items = this.state.items
     this.updateItems(items.filter(function(x) {
-      return x.name !== item.name;
-    }));
+      return x.name !== item.name
+    }))
   },
 
   addItem: function() {
-    var items = this.state.items;
-    var value = this.state.value;
+    var items = this.state.items
+    var value = this.state.value
     if(value.length) {
-      items.push({ name: value });
+      items.push({ name: value })
     }
     this.setState({
       value: ''
-    });
-    this.updateItems(items);
+    })
+    this.updateItems(items)
   },
 
   updateItems: function(items) {
-    this.setState({ items: items });
-    localStorage.setItem('items', JSON.stringify(items));
+    this.setState({ items: items })
+    localStorage.setItem('items', JSON.stringify(items))
   },
 
   handleKeyUp: function(e) {
     if(e.which === 13) {
-      this.addItem();
+      this.addItem()
     }
   },
 
   render: function() {
-    var items = this.state.items;
-    var value = this.state.value;
-    var handleDelete = this.handleDelete;
+    var items = this.state.items
+    var value = this.state.value
+    var handleDelete = this.handleDelete
     return (
       <div className="ui container">
         <div className="ui fluid action input">
@@ -59,9 +61,7 @@ var TodoApp = React.createClass({
           })}
         </ul>
       </div>
-    );
+    )
   }
 
-});
-
-module.exports = TodoApp;
+})

@@ -1,16 +1,19 @@
-var TodoItem = React.createClass({
+import React from 'react'
+
+export default React.createClass({
+  displayName: 'TodoItem',
 
   getDefaultProps: function() {
     return {
       name: ""
-    };
+    }
   },
 
   componentDidMount: function() {
     if(!('ontouchstart' in window)) {
       this.setState({
         cantTouchThis: true
-      });
+      })
     }
   },
 
@@ -18,26 +21,26 @@ var TodoItem = React.createClass({
     this.setState({
       touchStart: e.changedTouches[0].pageX,
       isTouchActive: true
-    });
+    })
   },
 
   handleTouchMove: function(e) {
-    var touchStart = this.state.touchStart;
-    var touchMove = e.changedTouches[0].pageX;
+    let touchStart = this.state.touchStart
+    let touchMove = e.changedTouches[0].pageX
     this.setState({
       touchMove: touchStart - touchMove
-    });
+    })
   },
 
   handleTouchEnd: function(e) {
     if(this.state.touchMove > this.refs.deleteButton.offsetWidth) {
-      this.props.onDelete();
+      this.props.onDelete()
     }
 
     this.setState({
       touchMove: 0,
       isTouchActive: false
-    });
+    })
   },
 
   getInitialState: function() {
@@ -47,18 +50,18 @@ var TodoItem = React.createClass({
       touchStart: 0,
       touchMove: 0,
       cantTouchThis: false
-    };
+    }
   },
 
   handleClick: function() {
-    var completed = this.state.completed;
-    this.setState({ completed: !completed });
+    let completed = this.state.completed
+    this.setState({ completed: !completed })
   },
 
   render: function() {
-    var name = this.props.name;
-    var completed = this.state.completed ? 'completed' : '';
-    var move = Math.max(100 - this.state.touchMove, 0);
+    let name = this.props.name
+    let completed = this.state.completed ? 'completed' : ''
+    let move = Math.max(100 - this.state.touchMove, 0)
     return (
       <li onTouchStart={this.handleTouchStart}
           onTouchMove={this.handleTouchMove}
@@ -77,9 +80,7 @@ var TodoItem = React.createClass({
             delete
         </button>
       </li>
-    );
+    )
   }
 
-});
-
-module.exports = TodoItem;
+})
