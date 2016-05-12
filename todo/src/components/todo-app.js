@@ -16,15 +16,15 @@ export default React.createClass({
   },
 
   handleDelete: function(item) {
-    var items = this.state.items
+    let items = this.state.items
     this.updateItems(items.filter(function(x) {
       return x.name !== item.name
     }))
   },
 
   addItem: function() {
-    var items = this.state.items
-    var value = this.state.value
+    let items = this.state.items
+    let value = this.state.value
     if(value.length) {
       items.push({ name: value })
     }
@@ -46,9 +46,9 @@ export default React.createClass({
   },
 
   render: function() {
-    var items = this.state.items
-    var value = this.state.value
-    var handleDelete = this.handleDelete
+    let items = this.state.items
+    let value = this.state.value
+    let handleDelete = this.handleDelete
     return (
       <div className="ui container">
         <div className="ui fluid action input">
